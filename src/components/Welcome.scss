@@ -32,7 +32,6 @@ $transitionTime: 1s;
 
 		&[data-status='right'] {
 			transform: translateX(100%);
-			transition: $transitionTime ease-in-out;
 		}
 
 		&[data-status='left'] {
