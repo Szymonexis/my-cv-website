@@ -23,8 +23,8 @@ import './Welcome.scss';
 <script is:inline>
 	const allContents = document.querySelectorAll('.welcome__content');
 
-	let i = 0;
-	const interval = 5000;
+	let i = 1;
+	const interval = 4000;
 	const intervalId = setInterval(() => {
     allContents[i].dataset.status = 'center';
     if (i !== 0) {
