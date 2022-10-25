@@ -1,18 +1,17 @@
 {
-  "name": "@example/basics",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  },
-  "devDependencies": {
-    "astro": "^1.0.0",
-    "prettier-plugin-astro": "^0.6.0"
-  },
-  "dependencies": {
-    "cypress": "^10.0.3"
-  }
+	"name": "szymon-kaszuba-webpage",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev --host",
+		"build": "astro build",
+		"preview": "astro preview"
+	},
+	"devDependencies": {
+		"astro": "^1.0.0",
+		"prettier-plugin-astro": "^0.6.0",
+		"sass": "^1.55.0"
+	},
+	"dependencies": {}
 }
