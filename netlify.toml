@@ -4,8 +4,6 @@ command = "astro build"
 functions = "netlify/functions"
 publish = "dist"
 
-[[plugins]]
-
 [plugins.inputs.postBuild]
 enable = true
 
