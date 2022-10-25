@@ -8,14 +8,18 @@ import './Welcome.scss';
 	</div>
 
 	<div class='welcome__content' data-index='1' data-status='right'>
-		<div class='welcome__hello'>My name is Szymon</div>
+		<div class='welcome__hello'>My name is
+			<br />
+			<span class='welcome__hello__name'>Szymon</span>
+			<span class='welcome__hello__subtext'>But you can call me Simon ;)</span>
+		</div>
 	</div>
 
 	<div class='welcome__content' data-index='2' data-status='right'>
 		<div class='welcome__hello'>
 			I am a
-      <br />
-			<span class='welcome__hello--magic'>Software Developer</span>
+			<br />
+			<span class='welcome__hello__magic'>Software Developer</span>
 		</div>
 	</div>
 </div>
@@ -24,16 +28,16 @@ import './Welcome.scss';
 	const allContents = document.querySelectorAll('.welcome__content');
 
 	let i = 1;
-	const interval = 4000;
+	const interval = 5500;
 	const intervalId = setInterval(() => {
-    allContents[i].dataset.status = 'center';
-    if (i !== 0) {
-      allContents[i - 1].dataset.status = 'left';
-    }
-    if (i < allContents.length - 1) {
-      i++;
-    }
-  }, interval);
+		allContents[i].dataset.status = 'center';
+		if (i !== 0) {
+			allContents[i - 1].dataset.status = 'left';
+		}
+		if (i < allContents.length - 1) {
+			i++;
+		}
+	}, interval);
 
 	setTimeout(() => {
 		clearInterval(intervalId);
