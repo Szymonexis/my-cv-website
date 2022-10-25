@@ -1,0 +1,90 @@
+@use './../../style/styles.scss' as global;
+
+$transitionTime: 500ms;
+
+.nav {
+	&__main {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 100%;
+		box-sizing: border-box;
+	}
+
+	&__button {
+		position: relative;
+		height: 9rem;
+
+		&__container {
+			cursor: pointer;
+			position: absolute;
+			bottom: 2rem;
+			right: 2rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			width: 5rem;
+			height: 5rem;
+			background-color: white;
+			color: global.$background-color;
+		}
+
+		&__icon {
+			position: absolute;
+			height: 48px;
+			width: 48px;
+
+			&--pressed {
+				transition: opacity $transitionTime ease-in-out;
+
+				&[data-status='active'] {
+					opacity: 1;
+				}
+
+				&[data-status='hidden'] {
+					opacity: 0;
+				}
+			}
+
+			&--unpressed {
+				transition: opacity $transitionTime ease-in-out;
+
+				&[data-status='active'] {
+					opacity: 1;
+				}
+
+				&[data-status='hidden'] {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	&__container {
+		height: calc(100% - 9rem);
+		display: flex;
+		align-items: center;
+		flex-direction: column-reverse;
+		padding-right: 2rem;
+
+		&[data-status='hidden'] {
+			transition: transform $transitionTime ease-in-out;
+			transform: translateX(100%);
+		}
+
+		&[data-status='active'] {
+			transition: transform $transitionTime ease-in-out;
+		}
+	}
+
+	&__element {
+		width: 6rem;
+		padding: 1rem;
+		color: global.$background-color;
+		background-color: white;
+		border-radius: 2rem;
+		text-align: center;
+		margin-top: 2rem;
+	}
+}

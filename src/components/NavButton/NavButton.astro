@@ -1,0 +1,53 @@
+---
+import './NavButton.scss';
+import { Icon } from 'astro-icon';
+---
+
+<div class='nav__main'>
+	<div class='nav__container' data-status='hidden'>
+		<span class='nav__element'>About Me</span>
+		<span class='nav__element'>Jobs</span>
+		<span class='nav__element'>Skills</span>
+		<span class='nav__element'>Hobbies</span>
+		<span class='nav__element'>Contact</span>
+	</div>
+
+	<div class='nav__button'>
+		<span class='nav__button__container'>
+			<span
+				class='nav__button__icon nav__button__icon--unpressed'
+				data-status='active'
+			>
+				<Icon name='mdi:menu' width='48' height='48' />
+			</span>
+			<span
+				class='nav__button__icon nav__button__icon--pressed'
+				data-status='hidden'
+			>
+				<Icon name='mdi:close' width='48' height='48' />
+			</span>
+		</span>
+	</div>
+</div>
+
+<script is:inline>
+	const navButton = document.querySelector('.nav__button__container');
+	const unpressedIcon = document.querySelector('.nav__button__icon--unpressed');
+	const pressedIcon = document.querySelector('.nav__button__icon--pressed');
+	const navContainer = document.querySelector('.nav__container');
+	let pressedState = 0;
+
+	navButton.addEventListener('click', () => {
+		if (!(pressedState % 2)) {
+			unpressedIcon.dataset.status = 'hidden';
+			pressedIcon.dataset.status = 'active';
+			navContainer.dataset.status = 'active';
+		} else {
+			unpressedIcon.dataset.status = 'active';
+			pressedIcon.dataset.status = 'hidden';
+			navContainer.dataset.status = 'hidden';
+		}
+
+		pressedState++;
+	});
+</script>

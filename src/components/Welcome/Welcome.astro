@@ -1,0 +1,117 @@
+---
+import './Welcome.scss';
+---
+
+<div class='welcome__main' data-status='active'>
+	<div class='welcome__content' data-index='0' data-status='unknown'>
+		<div class='welcome__hello'>Hi :)</div>
+	</div>
+
+	<div class='welcome__content' data-index='1' data-status='right'>
+		<div class='welcome__hello'>
+			My name is
+			<br />
+			<span class='welcome__hello__name'>Szymon</span>
+		</div>
+	</div>
+
+	<div class='welcome__content' data-index='2' data-status='right'>
+		<div class='welcome__hello'>
+			I am a
+			<br />
+			<span class='welcome__hello__magic'>Software Developer</span>
+		</div>
+	</div>
+
+	<div class='welcome__desktop-tip' data-status='unknown'>
+		<span class='welcome__desktop-tip--circle'></span>
+		<span class='welcome__desktop-tip--text'>Click to meet me</span>
+	</div>
+
+	<div class='welcome__mobile-tip' data-status='unknown'>
+		<div class='welcome__mobile-tip--text'>Touch</div>
+		<div class='welcome__mobile-tip--text'>to</div>
+		<div class='welcome__mobile-tip--text'>meet</div>
+		<div class='welcome__mobile-tip--text'>me</div>
+	</div>
+
+	<div class='welcome__skip-button' data-status='hidden'>
+		<button class='welcome__skip-button--button'>Skip Intro</button>
+	</div>
+</div>
+
+<script is:inline>
+	const regexp = /android|iphone|kindle|ipad/i;
+	const isMobileDevice = regexp.test(navigator.userAgent);
+
+	const allContents = document.querySelectorAll('.welcome__content');
+	const desktopTip = document.querySelector('.welcome__desktop-tip');
+	const desktopTipCircle = document.querySelector(
+		'.welcome__desktop-tip--circle'
+	);
+	const mobileTip = document.querySelector('.welcome__mobile-tip');
+	const skipButton = document.querySelector('.welcome__skip-button');
+
+	const goToMainContent = () => {
+		document.querySelector('.welcome__main').dataset.status = 'hidden';
+
+		setTimeout(() => {
+			document.querySelector('.main-content__main').dataset.status = 'active';
+			document.querySelector('.welcome__main').style.display = 'none';
+		}, 1000);
+	};
+
+	skipButton.addEventListener('click', goToMainContent, true);
+
+	setTimeout(() => {
+		allContents[0].dataset.status = 'center';
+		skipButton.dataset.status = 'active';
+
+		let i = 1;
+		const interval = 4000;
+		const intervalId = setInterval(() => {
+			allContents[i].dataset.status = 'center';
+
+			if (i !== 0) {
+				allContents[i - 1].dataset.status = 'left';
+			}
+
+			if (i == 2) {
+				skipButton.dataset.status = 'hidden';
+
+				setTimeout(() => {
+					skipButton.style.display = 'none';
+				}, 1000);
+			}
+
+			if (i < allContents.length - 1) {
+				i++;
+			}
+		}, interval);
+
+		setTimeout(() => {
+			clearInterval(intervalId);
+
+			if (isMobileDevice) {
+				mobileTip.dataset.status = 'active';
+			}
+
+			if (!isMobileDevice) {
+				desktopTip.dataset.status = 'active';
+
+				document.body.addEventListener('mousemove', (event) => {
+					const posX = event.clientX;
+					const posY = event.clientY;
+
+					const offsetY = desktopTipCircle.offsetHeight / 2;
+					const offsetX = desktopTip.offsetWidth / 2;
+
+					desktopTip.style.top = `${posY - offsetY}px`;
+					desktopTip.style.left = `${posX - offsetX}px`;
+				});
+			}
+
+			document.body.addEventListener('click', goToMainContent, true);
+		}, allContents.length * interval);
+	}, 1500);
+</script>

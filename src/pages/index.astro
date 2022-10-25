@@ -1,12 +1,7 @@
 ---
-import '../components/Welcome.astro';
-import Welcome from '../components/Welcome.astro';
-
-interface DataAboutMe {}
-
-const dataAboutMe: DataAboutMe = {};
-
 import '../style/styles.scss';
+import Welcome from '../components/Welcome/Welcome.astro';
+import MainContent from '../components/MainContent/MainContent.astro';
 ---
 
 <!DOCTYPE html>
@@ -19,5 +14,8 @@ import '../style/styles.scss';
 	</head>
 	<body>
 		<Welcome />
+		<MainContent />
+
+		<script is:inline></script>
 	</body>
 </html>
