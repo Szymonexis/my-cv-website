@@ -86,5 +86,18 @@ $transitionTime: 500ms;
 		border-radius: 2rem;
 		text-align: center;
 		margin-top: 2rem;
+		transition: $transitionTime ease-out;
+
+		&:hover {
+			transform: scale(1.1);
+			transition: $transitionTime ease-in-out;
+		}
+
+		&[data-status='click'] {
+			transition: 250ms ease-out;
+			background-color: global.$background-color;
+			color: white;
+			outline: 0.25rem white solid;
+		}
 	}
 }

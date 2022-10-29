@@ -5,11 +5,11 @@ import { Icon } from 'astro-icon';
 
 <div class='nav__main'>
 	<div class='nav__container' data-status='hidden'>
-		<span class='nav__element'>About Me</span>
-		<span class='nav__element'>Jobs</span>
-		<span class='nav__element'>Skills</span>
-		<span class='nav__element'>Hobbies</span>
-		<span class='nav__element'>Contact</span>
+		<span class='nav__element' data-status='default'>About Me</span>
+		<span class='nav__element' data-status='default'>Jobs</span>
+		<span class='nav__element' data-status='default'>Skills</span>
+		<span class='nav__element' data-status='default'>Hobbies</span>
+		<span class='nav__element' data-status='default'>Contact</span>
 	</div>
 
 	<div class='nav__button'>
@@ -35,8 +35,19 @@ import { Icon } from 'astro-icon';
 	const unpressedIcon = document.querySelector('.nav__button__icon--unpressed');
 	const pressedIcon = document.querySelector('.nav__button__icon--pressed');
 	const navContainer = document.querySelector('.nav__container');
-	let pressedState = 0;
+	const navElements = document.querySelectorAll('.nav__element');
 
+	navElements.forEach((elem) => {
+		elem.addEventListener('click', () => {
+			elem.dataset.status = 'click';
+
+			setTimeout(() => {
+				elem.dataset.status = 'default';
+			}, 300);
+		});
+	});
+
+	let pressedState = 0;
 	navButton.addEventListener('click', () => {
 		if (!(pressedState % 2)) {
 			unpressedIcon.dataset.status = 'hidden';
@@ -47,6 +58,8 @@ import { Icon } from 'astro-icon';
 			pressedIcon.dataset.status = 'hidden';
 			navContainer.dataset.status = 'hidden';
 		}
+
+		console.log({ pressedState });
 
 		pressedState++;
 	});

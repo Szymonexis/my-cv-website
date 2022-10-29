@@ -35,15 +35,6 @@ $transitionTime: 1s;
 		height: 100%;
 		width: 100%;
 
-		&[data-status='right'] {
-			transform: translateX(100%);
-		}
-
-		&[data-status='left'] {
-			transform: translateX(-100%);
-			transition: $transitionTime ease-in-out;
-		}
-
 		&[data-status='center'] {
 			opacity: 1;
 			transition: $transitionTime ease-in-out;

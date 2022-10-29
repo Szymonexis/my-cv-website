@@ -7,7 +7,7 @@ import './Welcome.scss';
 		<div class='welcome__hello'>Hi :)</div>
 	</div>
 
-	<div class='welcome__content' data-index='1' data-status='right'>
+	<div class='welcome__content' data-index='1' data-status='unknown'>
 		<div class='welcome__hello'>
 			My name is
 			<br />
@@ -15,7 +15,7 @@ import './Welcome.scss';
 		</div>
 	</div>
 
-	<div class='welcome__content' data-index='2' data-status='right'>
+	<div class='welcome__content' data-index='2' data-status='unknown'>
 		<div class='welcome__hello'>
 			I am a
 			<br />
@@ -58,22 +58,22 @@ import './Welcome.scss';
 		setTimeout(() => {
 			document.querySelector('.main-content__main').dataset.status = 'active';
 			document.querySelector('.welcome__main').style.display = 'none';
-		}, 1000);
+		}, 1500);
 	};
 
 	skipButton.addEventListener('click', goToMainContent, true);
+	const interval = 3000;
 
 	setTimeout(() => {
 		allContents[0].dataset.status = 'center';
 		skipButton.dataset.status = 'active';
 
 		let i = 1;
-		const interval = 4000;
 		const intervalId = setInterval(() => {
 			allContents[i].dataset.status = 'center';
 
 			if (i !== 0) {
-				allContents[i - 1].dataset.status = 'left';
+				allContents[i - 1].dataset.status = 'unknown';
 			}
 
 			if (i == 2) {
@@ -113,5 +113,5 @@ import './Welcome.scss';
 
 			document.body.addEventListener('click', goToMainContent, true);
 		}, allContents.length * interval);
-	}, 1500);
+	}, interval - 1500);
 </script>
