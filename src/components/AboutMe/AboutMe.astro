@@ -1,5 +1,50 @@
 ---
 import './AboutMe.scss';
+import { data } from '../../data/data';
+const { texts, picture, date } = data.aboutMe;
+
+const today = new Date();
+const yearsPassed = today.getFullYear() - date.getFullYear();
+
+const modifiedTexts = texts.map((text) => {
+	const index = text.indexOf('{YEAR}');
+
+	if (index + 1) {
+		return text.replace('{YEAR}', yearsPassed.toString());
+	}
+
+	return text;
+});
 ---
 
-<div class='about-me__main' data-status='hidden'>AboutMe</div>
+<div class='about-me__main'>
+	<article class='about-me__article'>
+		<header class='about-me__article__header'>About Me</header>
+		<div class='about-me__article__content' data-status='desktop'>
+			<div class='about-me__article__content__image' data-status='desktop'>
+				<img srcset={picture} />
+			</div>
+			<div class='about-me__article__content__text' data-status='desktop'>
+				{modifiedTexts.map((text) => <p>{text}</p>)}
+			</div>
+		</div>
+	</article>
+</div>
+<script>
+	const isMobileDevice = !!Number(localStorage.getItem('isMobileDevice'));
+	const content = document.querySelector(
+		'.about-me__article__content'
+	) as HTMLElement;
+	const contentText = document.querySelector(
+		'.about-me__article__content__text'
+	) as HTMLElement;
+	const contentImage = document.querySelector(
+		'.about-me__article__content__image'
+	) as HTMLElement;
+
+	if (isMobileDevice) {
+		content.dataset.status = 'mobile';
+		contentText.dataset.status = 'mobile';
+		contentImage.dataset.status = 'mobile';
+	}
+</script>

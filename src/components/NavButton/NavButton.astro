@@ -1,41 +1,55 @@
 ---
 import './NavButton.scss';
 import { Icon } from 'astro-icon';
+
+const iconSize = '48';
 ---
 
 <div class='nav__main'>
 	<div class='nav__container' data-status='hidden'>
-		<span class='nav__element' data-status='default'>About Me</span>
-		<span class='nav__element' data-status='default'>Jobs</span>
-		<span class='nav__element' data-status='default'>Skills</span>
-		<span class='nav__element' data-status='default'>Hobbies</span>
-		<span class='nav__element' data-status='default'>Contact</span>
+		<span class='nav__element no-select' data-status='default'>About Me</span>
+		<span class='nav__element no-select' data-status='default'>Jobs</span>
+		<span class='nav__element no-select' data-status='default'>Skills</span>
+		<span class='nav__element no-select' data-status='default'>Hobbies</span>
+		<span class='nav__element no-select' data-status='default'>Contact</span>
 	</div>
 
 	<div class='nav__button'>
 		<span class='nav__button__container'>
 			<span
 				class='nav__button__icon nav__button__icon--unpressed'
+				style={`
+					height: ${iconSize}px;
+					width: ${iconSize}px;
+				`}
 				data-status='active'
 			>
-				<Icon name='mdi:menu' width='48' height='48' />
+				<Icon name='mdi:menu' width={iconSize} height={iconSize} />
 			</span>
 			<span
 				class='nav__button__icon nav__button__icon--pressed'
 				data-status='hidden'
 			>
-				<Icon name='mdi:close' width='48' height='48' />
+				<Icon name='mdi:close' width={iconSize} height={iconSize} />
 			</span>
 		</span>
 	</div>
 </div>
 
-<script is:inline>
-	const navButton = document.querySelector('.nav__button__container');
-	const unpressedIcon = document.querySelector('.nav__button__icon--unpressed');
-	const pressedIcon = document.querySelector('.nav__button__icon--pressed');
-	const navContainer = document.querySelector('.nav__container');
-	const navElements = document.querySelectorAll('.nav__element');
+<script>
+	const navButton = document.querySelector(
+		'.nav__button__container'
+	) as HTMLElement;
+	const unpressedIcon = document.querySelector(
+		'.nav__button__icon--unpressed'
+	) as HTMLElement;
+	const pressedIcon = document.querySelector(
+		'.nav__button__icon--pressed'
+	) as HTMLElement;
+	const navContainer = document.querySelector('.nav__container') as HTMLElement;
+	const navElements = document.querySelectorAll(
+		'.nav__element'
+	) as NodeListOf<HTMLElement>;
 
 	navElements.forEach((elem) => {
 		elem.addEventListener('click', () => {

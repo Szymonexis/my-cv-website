@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
 
 $background-color: rgb(9, 9, 9);
+$webkit-scrollbar-width: 0.5rem;
 
 html,
 body {
@@ -13,8 +14,36 @@ body {
 body {
 	font-family: 'Roboto', sans-serif;
 	color: white;
-	background: rgb(9, 9, 9);
+	background-color: $background-color;
 	position: relative;
 	font-weight: 900;
 	-webkit-tap-highlight-color: transparent;
+}
+
+.no-select {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+header {
+	font-size: 4rem;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+::-webkit-scrollbar {
+	width: $webkit-scrollbar-width;
+
+	&-track {
+		background-color: $background-color;
+	}
+
+	&-thumb {
+		background-color: white;
+		border-radius: $webkit-scrollbar-width;
+	}
 }

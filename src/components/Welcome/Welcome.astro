@@ -4,22 +4,22 @@ import './Welcome.scss';
 
 <div class='welcome__main' data-status='active'>
 	<div class='welcome__content' data-index='0' data-status='unknown'>
-		<div class='welcome__hello'>Hi :)</div>
+		<div class='welcome__hello no-select'>Hi :)</div>
 	</div>
 
 	<div class='welcome__content' data-index='1' data-status='unknown'>
-		<div class='welcome__hello'>
+		<div class='welcome__hello no-select'>
 			My name is
 			<br />
-			<span class='welcome__hello__name'>Szymon</span>
+			<span class='welcome__hello__name no-select'>Szymon</span>
 		</div>
 	</div>
 
 	<div class='welcome__content' data-index='2' data-status='unknown'>
-		<div class='welcome__hello'>
+		<div class='welcome__hello no-select'>
 			I am a
 			<br />
-			<span class='welcome__hello__magic'>Software Developer</span>
+			<span class='welcome__hello__magic no-select'>Software Developer</span>
 		</div>
 	</div>
 
@@ -29,37 +29,42 @@ import './Welcome.scss';
 	</div>
 
 	<div class='welcome__mobile-tip' data-status='unknown'>
-		<div class='welcome__mobile-tip--text'>Touch</div>
-		<div class='welcome__mobile-tip--text'>to</div>
-		<div class='welcome__mobile-tip--text'>meet</div>
-		<div class='welcome__mobile-tip--text'>me</div>
+		<div class='welcome__mobile-tip--text no-select'>Touch</div>
+		<div class='welcome__mobile-tip--text no-select'>to</div>
+		<div class='welcome__mobile-tip--text no-select'>meet</div>
+		<div class='welcome__mobile-tip--text no-select'>me</div>
 	</div>
 
 	<div class='welcome__skip-button' data-status='hidden'>
-		<button class='welcome__skip-button--button'>Skip Intro</button>
+		<button class='welcome__skip-button--button no-select'>Skip Intro</button>
 	</div>
 </div>
 
-<script is:inline>
-	const regexp = /android|iphone|kindle|ipad/i;
-	const isMobileDevice = regexp.test(navigator.userAgent);
-
-	const allContents = document.querySelectorAll('.welcome__content');
-	const desktopTip = document.querySelector('.welcome__desktop-tip');
+<script>
+	const isMobileDevice = !!Number(localStorage.getItem('isMobileDevice'));
+	const allContents = document.querySelectorAll('.welcome__content') as NodeListOf<HTMLElement>;
+	const desktopTip = document.querySelector('.welcome__desktop-tip') as HTMLElement;
 	const desktopTipCircle = document.querySelector(
 		'.welcome__desktop-tip--circle'
-	);
-	const mobileTip = document.querySelector('.welcome__mobile-tip');
-	const skipButton = document.querySelector('.welcome__skip-button');
+	) as HTMLElement;
+	const mobileTip = document.querySelector('.welcome__mobile-tip') as HTMLElement;
+	const skipButton = document.querySelector('.welcome__skip-button') as HTMLElement;
 
 	const goToMainContent = () => {
-		document.querySelector('.welcome__main').dataset.status = 'hidden';
+		(document.querySelector('.welcome__main') as HTMLElement).dataset.status = 'hidden';
 
 		setTimeout(() => {
-			document.querySelector('.main-content__main').dataset.status = 'active';
-			document.querySelector('.welcome__main').style.display = 'none';
+			(document.querySelector('.main-content__main') as HTMLElement).dataset.status = 'active';
+			(document.querySelector('.welcome__main') as HTMLElement).style.display = 'none';
 		}, 1500);
 	};
+
+	let mousePosX = -1;
+	let mousePosY = -1;
+	window.addEventListener('mousemove', (e) => {
+		mousePosX = e.clientX;
+		mousePosY = e.clientY;
+	});
 
 	skipButton.addEventListener('click', goToMainContent, true);
 	const interval = 3000;
@@ -92,22 +97,27 @@ import './Welcome.scss';
 		setTimeout(() => {
 			clearInterval(intervalId);
 
+			const offsetX = desktopTip.offsetWidth / 2;
+			const offsetY = desktopTipCircle.offsetHeight / 2;
+
+			let posX = mousePosX;
+			let posY = mousePosY;
+
 			if (isMobileDevice) {
 				mobileTip.dataset.status = 'active';
 			}
 
 			if (!isMobileDevice) {
 				desktopTip.dataset.status = 'active';
+				desktopTip.style.left = `${posX - offsetX}px`;
+				desktopTip.style.top = `${posY - offsetY}px`;
 
 				document.body.addEventListener('mousemove', (event) => {
-					const posX = event.clientX;
-					const posY = event.clientY;
+					posX = event.clientX;
+					posY = event.clientY;
 
-					const offsetY = desktopTipCircle.offsetHeight / 2;
-					const offsetX = desktopTip.offsetWidth / 2;
-
-					desktopTip.style.top = `${posY - offsetY}px`;
 					desktopTip.style.left = `${posX - offsetX}px`;
+					desktopTip.style.top = `${posY - offsetY}px`;
 				});
 			}
 

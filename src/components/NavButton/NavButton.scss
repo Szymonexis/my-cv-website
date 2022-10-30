@@ -32,8 +32,6 @@ $transitionTime: 500ms;
 
 		&__icon {
 			position: absolute;
-			height: 48px;
-			width: 48px;
 
 			&--pressed {
 				transition: opacity $transitionTime ease-in-out;
@@ -87,6 +85,7 @@ $transitionTime: 500ms;
 		text-align: center;
 		margin-top: 2rem;
 		transition: $transitionTime ease-out;
+		cursor: default;
 
 		&:hover {
 			transform: scale(1.1);

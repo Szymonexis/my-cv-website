@@ -15,7 +15,13 @@ import MainContent from '../components/MainContent/MainContent.astro';
 	<body>
 		<Welcome />
 		<MainContent />
+		<script>
+			const isMobileDeviceCheck = () => {
+				const regexp = /android|iphone|kindle|ipad/i;
+				return regexp.test(navigator.userAgent) ? 1 : 0;
+			};
 
-		<script is:inline></script>
+			localStorage.setItem('isMobileDevice', isMobileDeviceCheck().toString());
+		</script>
 	</body>
 </html>
