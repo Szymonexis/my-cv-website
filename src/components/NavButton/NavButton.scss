@@ -27,7 +27,7 @@ $transitionTime: 500ms;
 			width: 5rem;
 			height: 5rem;
 			background-color: white;
-			color: global.$background-color;
+			color: global.$background-black;
 		}
 
 		&__icon {
@@ -79,7 +79,7 @@ $transitionTime: 500ms;
 	&__element {
 		width: 6rem;
 		padding: 1rem;
-		color: global.$background-color;
+		color: global.$background-black;
 		background-color: white;
 		border-radius: 2rem;
 		text-align: center;
@@ -94,7 +94,7 @@ $transitionTime: 500ms;
 
 		&[data-status='click'] {
 			transition: 250ms ease-out;
-			background-color: global.$background-color;
+			background-color: global.$background-black;
 			color: white;
 			outline: 0.25rem white solid;
 		}

@@ -20,13 +20,23 @@ const modifiedTexts = texts.map((text) => {
 <div class='about-me__main'>
 	<article class='about-me__article'>
 		<header class='about-me__article__header'>About Me</header>
-		<div class='about-me__article__content' data-status='desktop'>
-			<div class='about-me__article__content__image' data-status='desktop'>
-				<img srcset={picture} />
+		<div class='about-me__article__content__container'>
+			<div class='about-me__article__content' data-status='desktop'>
+				<div class='about-me__article__content__image' data-status='desktop'>
+					<img srcset={picture} />
+				</div>
+				<div class='about-me__article__content__text' data-status='desktop'>
+					{modifiedTexts.map((text) => <p>{text}</p>)}
+				</div>
 			</div>
-			<div class='about-me__article__content__text' data-status='desktop'>
-				{modifiedTexts.map((text) => <p>{text}</p>)}
-			</div>
+		</div>
+
+		<div class='about-me__article__animation'>
+			{
+				new Array(10)
+					.fill(0)
+					.map(() => <div class='about-me__article__animation__square' />)
+			}
 		</div>
 	</article>
 </div>
@@ -47,4 +57,26 @@ const modifiedTexts = texts.map((text) => {
 		contentText.dataset.status = 'mobile';
 		contentImage.dataset.status = 'mobile';
 	}
+
+	const animationClass = '.about-me__article__animation';
+	const animation = document.querySelector(`${animationClass}`) as HTMLElement;
+	const squares = document.querySelectorAll(
+		`${animationClass}__square`
+	) as NodeListOf<HTMLElement>;
+
+	const getSquaresSize = () => {
+		const animationWidth = animation.getBoundingClientRect().width;
+		squares.forEach((square, index) => {
+			const squareSize = animationWidth / squares.length;
+			const squareDiagonal = Math.sqrt(Math.pow(squareSize, 2) + Math.pow(squareSize, 2));
+
+			square.style.width = `${squareSize + 10}px`;
+			square.style.height = `${squareSize + 10}px`;
+			square.style.left = `${index * squareSize}px`;
+			square.style.bottom = `-${squareDiagonal / 2 + 10}px`;
+		});
+	};
+
+	getSquaresSize();
+	animation.addEventListener('resize', getSquaresSize);
 </script>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
 
-$background-color: rgb(9, 9, 9);
+$background-black: rgb(9, 9, 9);
+$background-grey: rgba(66, 66, 66, 0.5);
 $webkit-scrollbar-width: 0.5rem;
 
 html,
@@ -14,7 +15,7 @@ body {
 body {
 	font-family: 'Roboto', sans-serif;
 	color: white;
-	background-color: $background-color;
+	background-color: $background-black;
 	position: relative;
 	font-weight: 900;
 	-webkit-tap-highlight-color: transparent;
@@ -39,7 +40,7 @@ header {
 	width: $webkit-scrollbar-width;
 
 	&-track {
-		background-color: $background-color;
+		background-color: $background-black;
 	}
 
 	&-thumb {
